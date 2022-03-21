@@ -1,0 +1,44 @@
+# Copyright 2021 Chainguard, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+name: Test
+
+on:
+  pull_request:
+    branches: [ 'main', 'release-*' ]
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code onto GOPATH
+      uses: actions/checkout@v3
+
+    # https://github.com/mvdan/github-actions-golang#how-do-i-set-up-caching-between-builds
+    - uses: actions/cache@v2
+      with:
+        # In order:
+        # * Module download cache
+        # * Build cache (Linux)
+        path: |
+          ~/go/pkg/mod
+          ~/.cache/go-build
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+    - name: Set up Go 1.17.x
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17.x
+
+    - run: |
+        # We limit the depth to 3 mostly to avoid go.mod files that get pulled into `third_party` like some hashicorp repos.
+        for dir in $(find . -name go.mod -maxdepth 3 -exec dirname {} \; ); do
+          echo "::group:: $dir"
+          pushd $dir
+          # Exclude running unit tests against third_party repos.
+          go test -race $(go list ./... | grep -v third_party/)
+          popd
+          echo ::endgroup::
+        done
