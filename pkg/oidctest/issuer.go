@@ -59,6 +59,7 @@ func NewIssuer(t *testing.T) (jose.Signer, string) {
 			TokenEndpoint: testIssuer + "/token",
 		}); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
@@ -71,6 +72,7 @@ func NewIssuer(t *testing.T) (jose.Signer, string) {
 			},
 		}); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
@@ -85,6 +87,7 @@ func NewIssuer(t *testing.T) (jose.Signer, string) {
 		redirectURL, err := url.Parse(r.URL.Query().Get("redirect_uri"))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 
 		// Rely on `code` as a mechanism to encode information required by the token
@@ -152,6 +155,7 @@ func NewIssuer(t *testing.T) (jose.Signer, string) {
 			AccessToken: "garbage",
 		}); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
