@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code onto GOPATH
-      uses: actions/checkout@v3
+      uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
 
     # https://github.com/mvdan/github-actions-golang#how-do-i-set-up-caching-between-builds
-    - uses: actions/cache@v2
+    - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
       with:
         # In order:
         # * Module download cache
@@ -27,10 +27,10 @@ jobs:
         key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-
-    - name: Set up Go 1.17.x
-      uses: actions/setup-go@v2
+    - name: Set up Go
+      uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
       with:
-        go-version: 1.17.x
+        go-version-file: './go.mod'
 
     - run: |
         # We limit the depth to 3 mostly to avoid go.mod files that get pulled into `third_party` like some hashicorp repos.
