@@ -12,7 +12,7 @@ import (
 
 	"chainguard.dev/go-oidctest/pkg/oidctest"
 	"github.com/coreos/go-oidc/v3/oidc"
-	"gopkg.in/square/go-jose.v2/jwt"
+	"github.com/go-jose/go-jose/v3/jwt"
 )
 
 func TestNewIssuer(t *testing.T) {
