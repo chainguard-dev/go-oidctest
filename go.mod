@@ -1,18 +1,19 @@
 module chainguard.dev/go-oidctest
 
-go 1.17
+go 1.21
+
+toolchain go1.22.1
 
 require (
-	github.com/coreos/go-oidc/v3 v3.1.0
-	gopkg.in/square/go-jose.v2 v2.6.0
+	github.com/coreos/go-oidc/v3 v3.10.0
+	github.com/go-jose/go-jose/v3 v3.0.3
 )
 
 require (
-	github.com/golang/protobuf v1.2.0 // indirect
-	github.com/google/go-cmp v0.5.7 // indirect
-	github.com/stretchr/testify v1.7.1 // indirect
-	golang.org/x/crypto v0.17.0 // indirect
-	golang.org/x/net v0.17.0 // indirect
-	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d // indirect
-	google.golang.org/appengine v1.4.0 // indirect
+	github.com/go-jose/go-jose/v4 v4.0.1 // indirect
+	github.com/golang/protobuf v1.5.3 // indirect
+	golang.org/x/crypto v0.22.0 // indirect
+	golang.org/x/oauth2 v0.13.0 // indirect
+	google.golang.org/appengine v1.6.8 // indirect
+	google.golang.org/protobuf v1.31.0 // indirect
 )
