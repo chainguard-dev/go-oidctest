@@ -16,8 +16,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-jose/go-jose/v3"
-	"github.com/go-jose/go-jose/v3/jwt"
+	"github.com/go-jose/go-jose/v4"
+	"github.com/go-jose/go-jose/v4/jwt"
 )
 
 // Stand up a simple OIDC endpoint.
@@ -138,7 +138,7 @@ func NewIssuer(t *testing.T) (jose.Signer, string) {
 				Audience: jwt.Audience{c.ClientID},
 			},
 			Nonce: c.Nonce,
-		}).CompactSerialize()
+		}).Serialize()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
