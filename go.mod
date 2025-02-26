@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/coreos/go-oidc/v3 v3.12.0
-	github.com/go-jose/go-jose/v3 v3.0.3
+	github.com/go-jose/go-jose/v3 v3.0.4
 )
 
 require (
